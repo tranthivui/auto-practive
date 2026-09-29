@@ -19,11 +19,13 @@ test.describe("Verify home page load success", async () => {
     expect(naturalWithd).toBeGreaterThan(0);
     //Verify navigation menu hien thi
     await expect(homePage.navigationMenu).toBeVisible();
+    //Verify feature items 
+    await expect(homePage.featuresItems).toBeVisible();
     //Verify cac menu con hien thi
-    await expect(homePage.smHome).toBeVisible();
-    await expect(homePage.smProducts).toBeVisible();
-    await expect(homePage.smCart).toBeVisible();
-    await expect(homePage.smLogin).toBeVisible();
-    await expect(homePage.smContact).toBeVisible();
+    await expect(homePage.homeLink).toBeVisible();
+    await expect(homePage.productsLink).toBeVisible();
+    await expect(homePage.cartLink).toBeVisible();
+    await expect(homePage.loginLink).toBeVisible();
+    await expect(homePage.contactLink).toBeVisible();
   })
 })

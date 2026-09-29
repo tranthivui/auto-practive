@@ -5,11 +5,11 @@ export class HomePage {
     logo: Locator;
     navigationMenu: Locator;
     featuresItems: Locator;
-    smHome: Locator;
-    smProducts: Locator;
-        smCart: Locator;
-        smLogin: Locator;
-        smContact: Locator;
+    homeLink: Locator;
+    productsLink: Locator;
+    cartLink: Locator;
+    loginLink: Locator;
+    contactLink: Locator;
 
 
 
@@ -18,12 +18,10 @@ export class HomePage {
         this.logo = this.page.locator(".logo.pull-left").getByRole("img");
         this.navigationMenu = this.page.locator(".shop-menu.pull-right");
         this.featuresItems = this.page.locator(".features_items");
-        this.smHome=this.page.getByRole("link",{name: " Home"});
-                this.smProducts=this.page.getByRole("link",{name: " Products"});
-                        this.smCart=this.page.getByRole("link",{name: " Cart"});
-                                this.smLogin=this.page.getByRole("link",{name: " Signup / Login"});
-        this.smContact=this.page.getByRole("link",{name: " Contact us"});
-
-
+        this.homeLink = this.page.getByRole("link", { name: " Home" });
+        this.productsLink = this.page.getByRole("link", { name: " Products" });
+        this.cartLink = this.page.getByRole("link", { name: " Cart" });
+        this.loginLink = this.page.getByRole("link", { name: " Signup / Login" });
+        this.contactLink = this.page.getByRole("link", { name: " Contact us" });
     }
 }
