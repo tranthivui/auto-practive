@@ -12,7 +12,7 @@ test.describe("Verify home page load success", async () => {
 
   test("Verify home page", async ({ homePage }) => {
     //Verify url
-    await expect(homePage.page).toHaveURL(testData.url);
+    await expect(homePage.page).toHaveURL(testData.homeURL);
     //Verify load logo success
     const naturalWidth = await homePage.logo.evaluate(
       (img: HTMLImageElement) => img.naturalWidth
@@ -32,10 +32,12 @@ test.describe("Verify home page load success", async () => {
 
   test("Verify click product menu", async ({ homePage, product }) => {
     await homePage.openProducts();
+    await expect(product.productHeading).toBeVisible();
     const firstProduct = product.getProduct(0);
     await expect(product.page).toHaveURL(testData.productURL);
     await expect(firstProduct).toBeVisible();
     await expect(product.getProductName(firstProduct)).toBeVisible();
+    await expect(product.getProductName(firstProduct)).not.toBeEmpty();
     await expect(product.getProductPrice(firstProduct)).toBeVisible();
     await expect(product.getViewProductDetail(firstProduct)).toBeVisible();
   })
