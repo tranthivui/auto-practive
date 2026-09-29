@@ -24,4 +24,8 @@ export class HomePage {
         this.loginLink = this.page.getByRole("link", { name: " Signup / Login" });
         this.contactLink = this.page.getByRole("link", { name: " Contact us" });
     }
+
+    async openProducts(){
+        await this.productsLink.click();
+    }
 }
