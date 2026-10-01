@@ -21,8 +21,8 @@ test.describe("Verify search product",async()=>{
             await expect(product.searchHeading).toBeVisible();
         });
         await test.step("Verify list product",async()=>{
+            await expect(product.listProduct.first()).toBeVisible();
             const totalProduct=await product.listProduct.count();
-            console.log(`Total product ${totalProduct}`);
             expect(totalProduct).toBeGreaterThan(0);
             let found=false;
             for(let i=0;i<totalProduct;i++){
@@ -32,7 +32,7 @@ test.describe("Verify search product",async()=>{
                     break;
                 }
             };
-            await expect(found).toBe(true);
+            expect(found).toBe(true);
         })
     })
 })

@@ -19,10 +19,6 @@ export class Product {
         this.searchInput=this.page.getByPlaceholder("Search Product");
         this.searchBtn=this.page.locator("#submit_search");
         this.searchHeading=this.page.getByRole("heading",{level:2,name:"Searched Products"})
-        //   this.productItem = this.listProduct.first();
-        //   this.productName = this.productItem.locator(".overlay-content p");
-        //   this.productPrice = this.productItem.locator(".overlay-content h2");
-        //   this.viewProduct = this.productItem.getByRole("link", {name: "View Product" });
     }
 
     getProduct(i: number): Locator {
