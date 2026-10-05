@@ -13,7 +13,7 @@ test.describe("Verify search product",async()=>{
         await expect(product.page).toHaveURL(testData.productURL);
     });
 
-    test("Search product", async({product})=>{
+    test("Search product @smoke", async({product})=>{
         await test.step("Search",async()=>{
             await product.searchProduct(testData.keyWord);
         });
@@ -34,9 +34,5 @@ test.describe("Verify search product",async()=>{
             };
             expect(found).toBe(true);
         })
-    })
-
-    test("Verify",async()=>{
-        console.log("test");
     })
 })
