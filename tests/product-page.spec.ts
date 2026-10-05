@@ -9,7 +9,7 @@ test.describe("Verify search product",async()=>{
   };
     test.beforeEach("Go to home page",async({product,homePage})=>{
         await product.page.goto(testData.homeURL);
-        await homePage.openProducts();
+        await homePage.openMenu(homePage.productsLink);
         await expect(product.page).toHaveURL(testData.productURL);
     });
 

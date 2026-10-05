@@ -22,10 +22,10 @@ export class HomePage {
         this.productsLink = this.page.getByRole("link", { name: " Products" });
         this.cartLink = this.page.getByRole("link", { name: " Cart" });
         this.loginLink = this.page.getByRole("link", { name: " Signup / Login" });
-        this.contactLink = this.page.getByRole("link", { name: " Contact us" });
+        this.contactLink = this.page.getByRole("link", { name: " Contact us" });                           
     }
 
-    async openProducts(){
-        await this.productsLink.click();
+    async openMenu(locator:Locator){
+        await locator.click();
     }
 }
