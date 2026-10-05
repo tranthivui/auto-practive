@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../src/fixtures/product.fixture';
+import { test } from "../src/fixtures/page.fixture"
 import { HomePage } from '../src/pages/home-page.page';
 test.describe("Verify home page load success", async () => {
   const testData = {
@@ -34,7 +34,7 @@ test.describe("Verify home page load success", async () => {
   })
 
   test("Verify click product menu",{tag:"@smoke"}, async ({ homePage, product }) => {
-    await homePage.openMenu(homePage.productsLink);
+    await homePage.clickProductLink();
     await expect(product.productHeading).toBeVisible();
     const firstProduct = product.getProduct(0);
     await expect(product.page).toHaveURL(testData.url.product);
@@ -43,12 +43,5 @@ test.describe("Verify home page load success", async () => {
     await expect(product.getProductName(firstProduct)).not.toBeEmpty();
     await expect(product.getProductPrice(firstProduct)).toBeVisible();
     await expect(product.getViewProductDetail(firstProduct)).toBeVisible();
-  })
-
-  test("Login fail with invalid user/pass",async({homePage})=>{
-    await homePage.openMenu(homePage.loginLink);
-    //Verify da vao trang login
-    await expect(homePage.page).toHaveURL(testData.url.login);
-    //Verify heading
   })
 })

@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-export class Product {
+export class ProductPage {
     page: Page;
     productHeading: Locator;
     listProduct: Locator;

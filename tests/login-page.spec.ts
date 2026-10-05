@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../src/fixtures/login.fixture";
+import { test } from "../src/fixtures/page.fixture"
 
 test.describe("Verify login function", async () => {
     const testData = {
@@ -21,7 +21,7 @@ test.describe("Verify login function", async () => {
         });
 
         await test.step("Go to login page", async () => {
-            await homePage.openMenu(homePage.loginLink);
+            await homePage.clickLoginSingupLink();
         })
     });
 

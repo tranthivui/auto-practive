@@ -25,7 +25,11 @@ export class HomePage {
         this.contactLink = this.page.getByRole("link", { name: " Contact us" });                           
     }
 
-    async openMenu(locator:Locator){
-        await locator.click();
+    async clickProductLink(){
+        await this.productsLink.click();
+    }
+
+    async clickLoginSingupLink(){
+        await this.loginLink.click();
     }
 }

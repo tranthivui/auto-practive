@@ -15,7 +15,7 @@ export class LoginPage {
         this.loginForm=this.page.locator(".login-form")
         this.email = this.loginForm.getByPlaceholder("Email Address");
         this.password = this.loginForm.getByPlaceholder("Password");
-        this.loginBtn = this.page.getByRole("button", { name: "Login" });
+        this.loginBtn = this.loginForm.getByRole("button", { name: "Login" });
         this.loginFailMess = this.loginForm.locator("p");
     }
 

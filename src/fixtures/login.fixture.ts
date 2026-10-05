@@ -1,4 +1,4 @@
-import {test as base} from "../fixtures/product.fixture";
+import {test as base} from "@playwright/test";
 import { LoginPage } from "../pages/login.page";
 
 export const test=base.extend<{loginPage:LoginPage}>({

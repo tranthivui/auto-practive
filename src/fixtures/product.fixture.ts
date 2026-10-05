@@ -1,9 +1,9 @@
-import {test as base} from "../fixtures/home-page.fixture";
-import { Product } from "../pages/product.page";
+import {test as base} from "@playwright/test";
+import { ProductPage } from "../pages/product.page";
 
-export const test=base.extend<{product:Product}>({
+export const test=base.extend<{product:ProductPage}>({
     product: async({page},use)=>{
-        const product=new Product(page);
+        const product=new ProductPage(page);
         await use(product);
     }
 })
