@@ -30,7 +30,7 @@ test.describe("Verify home page load success", async () => {
     await expect(homePage.contactLink).toBeVisible()
   })
 
-  test("Verify click product menu @smoke", async ({ homePage, product }) => {
+  test("Verify click product menu",{tag:"@smoke"}, async ({ homePage, product }) => {
     await homePage.openProducts();
     await expect(product.productHeading).toBeVisible();
     const firstProduct = product.getProduct(0);
