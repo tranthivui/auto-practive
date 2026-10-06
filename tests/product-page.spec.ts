@@ -1,19 +1,31 @@
-import { expect } from "@playwright/test";
+import { expect, Locator } from "@playwright/test";
 import { test } from "../src/fixtures/page.fixture";
 test.describe("Verify search product", async () => {
     const testData = {
-        homeURL: "https://automationexercise.com/",
-        productURL: "https://automationexercise.com/products",
+        url: {
+            home: "https://automationexercise.com/",
+            product: "/products",
+            productDetail: "product_details"
+        },
         keyWord: "Top"
-        // menu: ["Home", "Products", "Cart", "Signup / Login", "- Contact us"]
     };
-    test.beforeEach("Go to home page", async ({ product, homePage }) => {
-        await product.page.goto(testData.homeURL);
-        await homePage.openProducts();
-        await expect(product.page).toHaveURL(testData.productURL);
+    let firstProduct: Locator;
+    let productName: string;
+    let productPrice: string;
+    test.beforeEach("Go to home page", async ({ homePage }) => {
+        await test.step("Go to home page", async () => {
+            await homePage.page.goto(testData.url.home);
+        });
+        await test.step("Click menu Products", async () => {
+            await homePage.openProducts();
+        })
     });
 
-    test("Search product", { tag: "@smoke" }, async ({ product }) => {
+    test("Search product", { tag: "@smoke" }, async ({ product, productDetail }) => {
+        await test.step("Verify dang o /products", async () => {
+            await expect(product.page).toHaveURL(new RegExp(testData.url.product));
+        });
+
         await test.step("Search", async () => {
             await product.searchProduct(testData.keyWord);
         });
@@ -33,6 +45,34 @@ test.describe("Verify search product", async () => {
                 }
             };
             expect(found).toBe(true);
+        });
+        await test.step("Get first product", async () => {
+            firstProduct = product.listProduct.first();
+        });
+        await test.step("Save product name and price", async () => {
+            productName = await product.getProductName(firstProduct).innerText();
+            productPrice = await product.getProductPrice(firstProduct).innerText();
+        });
+        await test.step("Click view detai product", async () => {
+            await product.clickViewDetail(firstProduct);
+        });
+        await test.step("Verify url chuyen sang /product_detail/", async () => {
+            await expect(productDetail.page).toHaveURL(new RegExp(testData.url.productDetail));
+        });
+        await test.step("Verify product detail hien thi", async () => {
+            await expect(productDetail.name).toBeVisible();
+            await expect(productDetail.price).toBeVisible();
+            await expect(productDetail.category).toBeVisible();
+            await expect(productDetail.availability).toBeVisible();
+            await expect(productDetail.brand).toBeVisible();
+            await expect(productDetail.quantityInput).toBeVisible();
+            await expect(productDetail.addToCartBtn).toBeVisible();
+            await expect(productDetail.condition).toBeVisible();
+        });
+
+        await test.step("Verify detail name/price same search name/price", async () => {
+            await expect(productDetail.name).toHaveText(productName);
+            await expect(productDetail.price).toHaveText(productPrice);
         })
     })
 })
