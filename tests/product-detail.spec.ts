@@ -7,17 +7,15 @@ test.describe("Verify product detail page", async () => {
         productURL: "/products",
         productDetailUrl: "/product_details/"
     };
-    test.beforeEach("Go to home page", async ({ productDetail, homePage }) => {
+    test.beforeEach("Go to home page", async ({homePage }) => {
         await homePage.page.goto(testData.homeURL);
         await homePage.openProducts();
     });
 
     test("Verify product detail info", async ({ productDetail, product }) => {
         let firstProduct: Locator;
-        let p_firstName: string;
-        let p_fistPrice: string;
-        let d_firstName: string;
-        let d_firstPrice: string;
+        let productName: string;
+        let productPrice: string;
 
         await test.step("Verify url have /products", async () => {
             await expect(product.page).toHaveURL(new RegExp(testData.productURL));
@@ -28,8 +26,8 @@ test.describe("Verify product detail page", async () => {
         });
 
         await test.step("Save name and price of first product", async () => {
-            p_firstName = await product.getProductName(firstProduct).innerText();
-            p_fistPrice = await product.getProductPrice(firstProduct).innerText();
+            productName = await product.getProductName(firstProduct).innerText();
+            productPrice = await product.getProductPrice(firstProduct).innerText();
         });
 
         await test.step("Click view detail of first product", async () => {
@@ -52,10 +50,8 @@ test.describe("Verify product detail page", async () => {
         });
 
         await test.step("Verify name and price are same with first product", async () => {
-            d_firstName = await productDetail.name.innerText();
-            d_firstPrice = await productDetail.price.innerText();
-            expect(d_firstName).toBe(p_firstName);
-            expect(d_firstName).toBe(p_firstName);
+          await  expect(productDetail.name).toHaveText(productName);
+           await expect(productDetail.price).toHaveText(productPrice);
         })
     })
 })
