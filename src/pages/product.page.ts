@@ -28,11 +28,7 @@ export class ProductPage {
     getProductPrice(product: Locator): Locator {
         return product.locator(".overlay-content h2");
     }
-/*
-    getViewProductDetail(product: Locator): Locator {
-        return product.getByRole("link", { name: "View Product" });
-    }
-*/
+
     async inputSearchKeyword(keyWord:string){
         await this.searchInput.fill(keyWord);
     }
@@ -47,6 +43,6 @@ export class ProductPage {
     }
 
     async clickViewDetail(product:Locator){
-        await product.locator(".choose").locator("a").click();
+        await product.getByRole("link",{name:"View Product"}).click();
     }
 }
