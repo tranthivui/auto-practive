@@ -1,17 +1,16 @@
 import { expect, Locator } from "@playwright/test";
 import { test } from "../src/fixtures/page.fixture";
+import { ProductDetail } from "../src/pages/product-detail.page";
 test.describe("Verify search product", async () => {
     const testData = {
         url: {
             home: "https://automationexercise.com/",
             product: "/products",
-            productDetail: "product_details"
+            productDetail: "/product_details/"
         },
         keyWord: "Top"
     };
-    let firstProduct: Locator;
-    let productName: string;
-    let productPrice: string;
+
     test.beforeEach("Go to home page", async ({ homePage }) => {
         await test.step("Go to home page", async () => {
             await homePage.page.goto(testData.url.home);
@@ -21,7 +20,7 @@ test.describe("Verify search product", async () => {
         })
     });
 
-    test("Search product", { tag: "@smoke" }, async ({ product, productDetail }) => {
+    test("Search product TC003", { tag: "@smoke" }, async ({ product, productDetail }) => {
         await test.step("Verify dang o /products", async () => {
             await expect(product.page).toHaveURL(new RegExp(testData.url.product));
         });
@@ -45,7 +44,26 @@ test.describe("Verify search product", async () => {
                 }
             };
             expect(found).toBe(true);
+        })
+    });
+
+    test("Verify go to product detail TC006", async ({ product, productDetail }) => {
+        let firstProduct: Locator;
+        let productName: string;
+        let productPrice: string;
+        await test.step("Verify dang o /products", async () => {
+            await expect(product.page).toHaveURL(new RegExp(testData.url.product));
         });
+
+        await test.step("Search", async () => {
+            await product.searchProduct(testData.keyWord);
+        });
+        await test.step("Verify heading", async () => {
+            await expect(product.searchHeading).toBeVisible();
+        });
+        await test.step("Verify co it nhat 1 search result", async () => {
+            await expect(product.listProduct.first()).toBeVisible();
+        })
         await test.step("Get first product", async () => {
             firstProduct = product.listProduct.first();
         });
