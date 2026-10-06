@@ -25,11 +25,11 @@ export class HomePage {
         this.contactLink = this.page.getByRole("link", { name: " Contact us" });                           
     }
 
-    async clickProductLink(){
+    async openProducts(){
         await this.productsLink.click();
     }
 
-    async clickLoginSingupLink(){
+    async openLogin(){
         await this.loginLink.click();
     }
 }

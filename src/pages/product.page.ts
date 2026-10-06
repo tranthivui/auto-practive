@@ -7,10 +7,6 @@ export class ProductPage {
     searchInput: Locator;
     searchBtn: Locator;
     searchHeading: Locator;
-    //  productItem: Locator;
-    //  productName: Locator;
-    //  productPrice: Locator;
-    //  viewProduct: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -18,7 +14,7 @@ export class ProductPage {
         this.listProduct = this.page.locator(".features_items").locator(".col-sm-4");
         this.searchInput=this.page.getByPlaceholder("Search Product");
         this.searchBtn=this.page.locator("#submit_search");
-        this.searchHeading=this.page.getByRole("heading",{level:2,name:"Searched Products"})
+        this.searchHeading=this.page.getByRole("heading",{level:2,name:"Searched Products"});
     }
 
     getProduct(i: number): Locator {
@@ -32,11 +28,11 @@ export class ProductPage {
     getProductPrice(product: Locator): Locator {
         return product.locator(".overlay-content h2");
     }
-
+/*
     getViewProductDetail(product: Locator): Locator {
         return product.getByRole("link", { name: "View Product" });
     }
-
+*/
     async inputSearchKeyword(keyWord:string){
         await this.searchInput.fill(keyWord);
     }
@@ -48,5 +44,9 @@ export class ProductPage {
     async searchProduct(keyWord:string){
         await this.inputSearchKeyword(keyWord);
         await this.clickSearchBtn();
+    }
+
+    async clickViewDetail(product:Locator){
+        await product.locator(".choose").locator("a").click();
     }
 }

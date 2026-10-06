@@ -21,7 +21,7 @@ test.describe("Verify login function", async () => {
         });
 
         await test.step("Go to login page", async () => {
-            await homePage.clickLoginSingupLink();
+            await homePage.openLogin();
         })
     });
 

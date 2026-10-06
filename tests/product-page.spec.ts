@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../src/fixtures/product.fixture";
+import { test } from "../src/fixtures/page.fixture";
 test.describe("Verify search product", async () => {
     const testData = {
         homeURL: "https://automationexercise.com/",
@@ -9,7 +9,7 @@ test.describe("Verify search product", async () => {
     };
     test.beforeEach("Go to home page", async ({ product, homePage }) => {
         await product.page.goto(testData.homeURL);
-        await homePage.clickProductLink();
+        await homePage.openProducts();
         await expect(product.page).toHaveURL(testData.productURL);
     });
 

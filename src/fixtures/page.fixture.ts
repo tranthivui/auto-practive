@@ -2,10 +2,12 @@ import { test as base } from "@playwright/test";
 import { HomePage } from "../pages/home-page.page";
 import { ProductPage } from "../pages/product.page";
 import { LoginPage } from "../pages/login.page";
+import { ProductDetail } from "../pages/product-detail.page";
 type PageFixture = {
     homePage: HomePage;
     product: ProductPage;
-    loginPage: LoginPage
+    loginPage: LoginPage;
+    productDetail: ProductDetail
 };
 
 export const test = base.extend<PageFixture>({
@@ -21,5 +23,9 @@ export const test = base.extend<PageFixture>({
     loginPage: async ({ page }, use) => {
         const login = new LoginPage(page);
         await use(login)
+    },
+    productDetail: async({page},use)=>{
+        const productDetail=new ProductDetail(page);
+        await use(productDetail);
     }
 })

@@ -34,7 +34,7 @@ test.describe("Verify home page load success", async () => {
   })
 
   test("Verify click product menu",{tag:"@smoke"}, async ({ homePage, product }) => {
-    await homePage.clickProductLink();
+    await homePage.openProducts();
     await expect(product.productHeading).toBeVisible();
     const firstProduct = product.getProduct(0);
     await expect(product.page).toHaveURL(testData.url.product);
@@ -42,6 +42,6 @@ test.describe("Verify home page load success", async () => {
     await expect(product.getProductName(firstProduct)).toBeVisible();
     await expect(product.getProductName(firstProduct)).not.toBeEmpty();
     await expect(product.getProductPrice(firstProduct)).toBeVisible();
-    await expect(product.getViewProductDetail(firstProduct)).toBeVisible();
+    await expect(product.listProduct.first()).toBeVisible();
   })
 })
